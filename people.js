@@ -34,6 +34,29 @@ class People {
         return result;
     }
 
+    readName(req){
+
+        let result = {"error": "Nothing found that matches that. :("};
+
+        this.people.forEach((value) => {
+            if(value.name == req.params.name){
+                console.log(req.path);
+                result = value;
+            }
+        });
+
+        if(result.error){
+            //in red
+            console.log(req.path);
+        }
+        else{
+            //in green
+            console.log(req.path);
+        }
+        
+        return result;
+    }
+
 }
 
 module.exports = People;
