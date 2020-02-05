@@ -17,21 +17,37 @@ for(let i=0;i<99;i++){
 //console.log(people[10]);
 
 App.get("/person/name/:name", (req, res) => {
+
+    let result = "Nothing found that matches that. :(";
+
     people.forEach((value) => {
         if(value.name == req.params.name){
-            res.send(value);
+            console.log(req.path);
+            result = value;
         }
     });
-    res.send("Nothing found that matches that. :'(")
+    res.send(result);
 });
 
 App.get("/person/color/:color", (req, res) => {
+
+    let result = {"error": "Nothing found that matches that. :("};
+
     people.forEach((value) => {
         if(value.color == req.params.color){
-            res.send(value);
+            result = value;
         }
     });
-    res.send("Nothing found that matches that. :'(")
+
+    if(result.error){
+        //in red
+        console.log(req.path);
+    }
+    else{
+        //in green
+        console.log(req.path);
+    }
+    res.send(result);
 });
 
 App.listen(port, () =>{
