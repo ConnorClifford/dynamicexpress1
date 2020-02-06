@@ -2,8 +2,10 @@ const Express = require('express');
 const App = Express();
 const port = 80;
 
-const People = require("./people.js")
+const People = require("./People.js")
 let people = new People();
+
+App.use("/", Express.static("public"));
 
 App.get("/person/name/:name", (req, res) => {
 
@@ -14,6 +16,12 @@ App.get("/person/name/:name", (req, res) => {
 App.get("/person/color/:color", (req, res) => {
 
     res.send(people.readColor(req));  
+
+});
+
+App.post("/people/person/:name/:color", (req, res) => {
+
+    res.send(req.params);
 
 });
 
